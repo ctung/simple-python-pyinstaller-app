@@ -2,13 +2,8 @@ pipeline {
     agent any 
     stages {
         stage('Build') { 
-            agent {
-                docker {
-                    image 'python:2-alpine'
-                }
-            }
             steps {
-                sh 'python -m py_compile sources/add2vals.py sources/calc.py' 
+                sh '/tool/pandora64/bin/python3 -m py_compile sources/add2vals.py sources/calc.py' 
                 stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }
         }
